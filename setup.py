@@ -15,7 +15,7 @@ setup(
     scripts=['chainosc'],
     #test_suite='skeleton.tests',
     install_requires=[
-        'chainclient>=0.1',
+        'chainclient>=0.2',
         'websocket-client',
         'pyliblo',
         'coloredlogs'

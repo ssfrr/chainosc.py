@@ -10,7 +10,7 @@ import coloredlogs
 import json
 
 logger = logging.getLogger(__name__)
-coloredlogs.install(level=logging.DEBUG)
+coloredlogs.install(level=logging.INFO)
 
 
 class Sensor(object):
@@ -52,10 +52,11 @@ def main(site_url, osc_ip, osc_port):
 
 def get_sensor_hash(site):
     sensor_hash = {}
-    for device in site.rels['ch:devices'].rels['items']:
-        for sensor in device.rels['ch:sensors'].rels['items']:
+    summary = site.rels['ch:siteSummary']
+    for device in summary.devices:
+        for sensor in device.sensors:
             # TODO: add geolocation
-            sensor_hash[sensor.links.self.href] = Sensor(
+            sensor_hash[sensor.href] = Sensor(
                 sensor.metric, None, None, None)
     return sensor_hash
 
